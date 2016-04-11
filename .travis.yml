@@ -7,3 +7,6 @@ install:
   - make install
 
 script: make lint test
+
+notifications:
+  slack: epk-pe:vNpwB2JhG2MTUUXcRIVUMLGc
