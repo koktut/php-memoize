@@ -5,15 +5,18 @@ require_once './../vendor/autoload.php';
 
 function tfunc($val1, $val2)
 {
-    sleep(5);
     return $val1 + $val2;
 };
 
 $memoizer = new \PhpMemoizer\DiskCache('d:/cache');
 //$memoizer = new \PhpMemoizer\MemoryCache();
-$func = $memoizer->memoize('tfunc', 'tfunc', 0);
-
-echo $func(1, 2);
-echo $func(1, 2);
+$func = $memoizer->memoize('tfunc', 'tfunc', 10);
 
 $memoizer->clearCache();
+
+echo $func(1, 2);
+echo $func(1, 2);
+
+$memoizer->clearExpired();
+sleep(11);
+$memoizer->clearExpired();

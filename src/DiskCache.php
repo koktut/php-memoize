@@ -21,8 +21,8 @@ class DiskCache extends BaseCache
     {
         $files = scandir($this->cachDirectory);
         foreach ($files as $file) {
-            if (is_file($file)) {
-                unlink($file);
+            if (is_file($this->cachDirectory . DIRECTORY_SEPARATOR . $file)) {
+                $this->deleteResult($file);
             }
         }
     }
@@ -32,6 +32,14 @@ class DiskCache extends BaseCache
      */
     public function clearExpired()
     {
+        $files = scandir($this->cachDirectory);
+        foreach ($files as $file) {
+            if (is_file($this->cachDirectory . DIRECTORY_SEPARATOR . $file)) {
+                if ($this->isExpired($file)) {
+                    $this->deleteResult($file);
+                }
+            }
+        }
     }
 
     /**
@@ -75,10 +83,11 @@ class DiskCache extends BaseCache
     protected function cacheResult($key, $expire, $value)
     {
         $data = [
-            'expired' => $expire,
+            'expired' => $expire != 0 ? microtime(true) + $expire : 0,
             'value' => $value
         ];
         file_put_contents($this->getCacheFileName($key), serialize($data));
+        return $value;
     }
 
     /**
