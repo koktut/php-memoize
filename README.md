@@ -6,9 +6,9 @@
 
 ## Requirements
 
- - PHP >= 5.3
- - PostgreSQL
- - Composer
+ - 1
+ - 2
+ - 3
 
 ## Install
 

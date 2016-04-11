@@ -1,8 +1,8 @@
 {
     "name": "koktut/php-memoize",
     "type": "library",
-    "description": "Memoizetion functions result to disk",
-    "keywords": ["momoize", "disk"],
+    "description": "Memoization functions result",
+    "keywords": ["momoize"],
     "homepage": "https://github.com/koktut/php-memoize",
     "license":  "MIT",
     "authors": [
@@ -13,7 +13,7 @@
     ],
     "require-dev": {
         "phpunit/phpunit": "^5.2",
-        "squizlabs/php_codesniffer": "2.*"
+        "squizlabs/php_codesniffer": "2.*",
     },
     "autoload": {
         "psr-4": {

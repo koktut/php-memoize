@@ -11,24 +11,75 @@ class MemoryCache extends BaseCache
     private $cache;
 
     /**
-     *
+     * @param $key
+     * @return mixed
      */
-    public function memoize($func, $key)
+    protected function isCached($key)
     {
-        return function () use ($func, $key) {
-            $args = func_get_args();
-            if (!$this->isCached($key)) {
+        return isset($this->cache[$key]);
+    }
 
+    /**
+     * Clear all cached results
+     */
+    public function clearCache()
+    {
+        $this->cache = [];
+    }
+
+    /**
+     * Clear all expired results
+     */
+    public function clearExpired()
+    {
+        foreach ($this->cache as $key => $value) {
+            if ($this->isExpired($key)) {
+                $this->deleteResult($key);
             }
-        };
+        }
+    }
+
+    /**
+     * @param $key
+     * @return bool
+     */
+    protected function isExpired($key)
+    {
+        if ($this->cache[$key]['expired'] == 0) {
+            return false;
+        }
+        return $this->cache[$key]['expired'] < microtime(true);
     }
 
     /**
      * @param $key
      * @return mixed
      */
-    protected function isCached($key)
+    protected function getCachedResult($key)
     {
-        return isset($cache[$key]);
+        return $this->cache[$key]['value'];
+    }
+
+    /**
+     * @param $key
+     * @param $expire
+     * @param $value
+     * @return mixed
+     */
+    protected function cacheResult($key, $expire, $value)
+    {
+        $this->cache[$key] = [
+            'expired' => $expire != 0 ? microtime(true) + $expire : 0,
+            'value' => $value
+        ];
+        return $value;
+    }
+
+    /**
+     * @param $key
+     */
+    protected function deleteResult($key)
+    {
+        unset($this->cache[$key]);
     }
 }
