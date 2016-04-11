@@ -32,7 +32,7 @@ class MemoryCache extends BaseCache
      */
     public function clearExpired()
     {
-        foreach ($this->cache as $key => $value) {
+        foreach ($this->cache as $key) {
             if ($this->isExpired($key)) {
                 $this->deleteResult($key);
             }
