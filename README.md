@@ -18,7 +18,7 @@ $slowFunction = function ($val1, $val2) {
     return $val1 + $val2;
 };
 
-$memo = new MemoryCache();              // or $memo = new DiskCache(sys_get_temp_dir);
+$memo = new MemoryCache();              // or $memo = new DiskCache(sys_get_temp_dir());
 $func= $memo->memoize($slowFunction);
 
 // first call
