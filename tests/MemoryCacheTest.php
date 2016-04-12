@@ -120,5 +120,4 @@ class MemoryCacheTest extends \PHPUnit_Framework_TestCase
         sleep(2);
         $memoryCache->clearExpired();
     }
-
 }
