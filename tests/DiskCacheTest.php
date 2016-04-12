@@ -82,7 +82,6 @@ class DiskCacheTest extends \PHPUnit_Framework_TestCase
                 'getCachedResult'
             ],
             array($this->cacheDirectory->url())
-
         );
         $memoryCache->method('isCached')->will($this->returnValue(false));
         $memoryCache->expects($this->once())->method('cacheResult');
@@ -125,7 +124,6 @@ class DiskCacheTest extends \PHPUnit_Framework_TestCase
                 'getCachedResult'
             ],
             array($this->cacheDirectory->url())
-
         );
         $memoryCache->expects($this->exactly(2))->method('getCachedResult');
         $func = $memoryCache->memoize($this->testFunction);
