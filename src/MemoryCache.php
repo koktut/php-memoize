@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpMemoizer;
+namespace PhpMemo;
 
 /**
  * Class MemoryCache

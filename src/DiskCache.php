@@ -1,17 +1,17 @@
 <?php
 
-namespace PhpMemoizer;
+namespace PhpMemo;
 
 class DiskCache extends BaseCache
 {
-    protected $cachDirectory;
+    protected $cacheDirectory;
 
     /**
      * @param $cacheDirectory
      */
     public function __construct($cacheDirectory)
     {
-        $this->cachDirectory = $cacheDirectory;
+        $this->cacheDirectory = $cacheDirectory;
     }
 
     /**
@@ -19,9 +19,9 @@ class DiskCache extends BaseCache
      */
     public function clearCache()
     {
-        $files = scandir($this->cachDirectory);
+        $files = scandir($this->cacheDirectory);
         foreach ($files as $file) {
-            if (is_file($this->cachDirectory . DIRECTORY_SEPARATOR . $file)) {
+            if (is_file($this->cacheDirectory . DIRECTORY_SEPARATOR . $file)) {
                 $this->deleteResult($file);
             }
         }
@@ -32,9 +32,9 @@ class DiskCache extends BaseCache
      */
     public function clearExpired()
     {
-        $files = scandir($this->cachDirectory);
+        $files = scandir($this->cacheDirectory);
         foreach ($files as $file) {
-            if (is_file($this->cachDirectory . DIRECTORY_SEPARATOR . $file)) {
+            if (is_file($this->cacheDirectory . DIRECTORY_SEPARATOR . $file)) {
                 if ($this->isExpired($file)) {
                     $this->deleteResult($file);
                 }
@@ -100,6 +100,6 @@ class DiskCache extends BaseCache
 
     protected function getCacheFileName($key)
     {
-        return $this->cachDirectory . DIRECTORY_SEPARATOR . $key;
+        return $this->cacheDirectory . DIRECTORY_SEPARATOR . $key;
     }
 }
