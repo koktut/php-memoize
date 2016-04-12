@@ -28,11 +28,11 @@ class MemoryCache extends BaseCache
     }
 
     /**
-     * Clear all expired results
+     * Clear expired results
      */
     public function clearExpired()
     {
-        foreach ($this->cache as $key) {
+        foreach (array_keys($this->cache) as $key) {
             if ($this->isExpired($key)) {
                 $this->deleteResult($key);
             }

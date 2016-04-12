@@ -28,7 +28,7 @@ class DiskCache extends BaseCache
     }
 
     /**
-     * Clear all expired results
+     * Clear expired results
      */
     public function clearExpired()
     {
