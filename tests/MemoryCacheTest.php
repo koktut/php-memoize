@@ -13,6 +13,9 @@ class MemoryCacheTest extends \PHPUnit_Framework_TestCase
         };
     }
 
+    /**
+     * @test
+     */
     public function testMemoizeResultIsCorrect()
     {
         $memoryCache = new MemoryCache();
@@ -22,6 +25,9 @@ class MemoryCacheTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(3, $func(1, 2));
     }
 
+    /**
+     * @covers ::cacheResult
+     */
     public function testCacheResult()
     {
         $memoryCache = $this->getMock(
@@ -38,6 +44,9 @@ class MemoryCacheTest extends \PHPUnit_Framework_TestCase
         $func(1, 2);
     }
 
+    /**
+     * @covers ::getCachedResult
+     */
     public function testGetCachedResult()
     {
         $memoryCache = $this->getMock(
@@ -52,6 +61,9 @@ class MemoryCacheTest extends \PHPUnit_Framework_TestCase
         $func(1, 2);
     }
 
+    /**
+     * @test
+     */
     public function testCacheWhenNotCached()
     {
         $memoryCache = $this->getMock(
@@ -69,6 +81,9 @@ class MemoryCacheTest extends \PHPUnit_Framework_TestCase
         $func(1, 2);
     }
 
+    /**
+     * @test
+     */
     public function testCacheWhenExpired()
     {
         $memoryCache = $this->getMock(
@@ -88,6 +103,9 @@ class MemoryCacheTest extends \PHPUnit_Framework_TestCase
         $func(1, 2);
     }
 
+    /**
+     * @covers ::clearCache
+     */
     public function testClearCache()
     {
         $memoryCache = $this->getMock(
@@ -105,6 +123,9 @@ class MemoryCacheTest extends \PHPUnit_Framework_TestCase
         $func(1, 2);
     }
 
+    /**
+     * @covers clearExpired
+     */
     public function testClearExpired()
     {
         $memoryCache = $this->getMock(
