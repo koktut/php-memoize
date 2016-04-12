@@ -2,7 +2,7 @@
     "name": "koktut/php-memoize",
     "type": "library",
     "description": "Memoization functions result",
-    "keywords": ["momoize"],
+    "keywords": ["memoize"],
     "homepage": "https://github.com/koktut/php-memoize",
     "license":  "MIT",
     "authors": [
