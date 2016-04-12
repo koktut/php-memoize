@@ -1,5 +1,4 @@
-#### 
-Implementation of memoization on PHP
+### Implementation of memoization on PHP
 
 Based on http://eddmann.com/posts/implementing-and-using-memoization-in-php/
 
