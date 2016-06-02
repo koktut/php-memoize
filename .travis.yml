@@ -2,11 +2,12 @@ language: php
 php:
   - '7.0'
 
+addons:
+  code_climate:
+    repo_token: 83dfa6c83608f32a87187472eee92e59af04c60292c428f76b5fff97c20a8f8f
+
 install:
   - composer self-update
   - make install
 
 script: make lint test
-
-notifications:
-  slack: epk-pe:vNpwB2JhG2MTUUXcRIVUMLGc
