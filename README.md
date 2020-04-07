@@ -7,6 +7,11 @@ Based on http://eddmann.com/posts/implementing-and-using-memoization-in-php/
 [![Issue Count](https://codeclimate.com/github/koktut/php-memoize/badges/issue_count.svg)](https://codeclimate.com/github/koktut/php-memoize)
 [![Test Coverage](https://codeclimate.com/github/koktut/php-memoize/badges/coverage.svg)](https://codeclimate.com/github/koktut/php-memoize/coverage)
 
+## Install
+```
+composer require koktut/php-memoize
+```
+
 ## Usage
 
 ```
