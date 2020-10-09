@@ -35,7 +35,7 @@ class DiskCacheTest extends TestCase
     }
 
     /**
-     * @covers ::cacheResult
+     * @test
      */
     public function testCacheResult()
     {
@@ -57,7 +57,7 @@ class DiskCacheTest extends TestCase
     }
 
     /**
-     * @covers ::getCachedResult
+     * @test
      */
     public function testGetCachedResult()
     {
@@ -121,7 +121,7 @@ class DiskCacheTest extends TestCase
     }
 
     /**
-     * @covers ::clearCache
+     * @test
      */
     public function testClearCache()
     {
@@ -144,7 +144,7 @@ class DiskCacheTest extends TestCase
     }
 
     /**
-     * @covers ::clearExpire
+     * @test
      */
     public function testClearExpired()
     {

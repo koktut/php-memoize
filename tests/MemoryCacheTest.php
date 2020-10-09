@@ -31,7 +31,7 @@ class MemoryCacheTest extends TestCase
     }
 
     /**
-     * @covers ::cacheResult
+     * @test
      */
     public function testCacheResult()
     {
@@ -51,7 +51,7 @@ class MemoryCacheTest extends TestCase
     }
 
     /**
-     * @covers ::getCachedResult
+     * @test
      */
     public function testGetCachedResult()
     {
@@ -116,7 +116,7 @@ class MemoryCacheTest extends TestCase
     }
 
     /**
-     * @covers ::clearCache
+     * @test
      */
     public function testClearCache()
     {
@@ -138,7 +138,7 @@ class MemoryCacheTest extends TestCase
     }
 
     /**
-     * @covers ::clearExpired
+     * @test
      */
     public function testClearExpired()
     {

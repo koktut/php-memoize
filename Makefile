@@ -5,5 +5,5 @@ autoload:
 	composer dump-autoload
 
 test:
-	composer exec 'phpunit --color tests --coverage-clover build/logs/clover.xml'
-	composer exec 'test-reporter'
+	./vendor/bin/phpunit --color tests --coverage-clover build/logs/clover.xml
+	./vendor/bin/test-reporter
