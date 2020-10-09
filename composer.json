@@ -5,6 +5,7 @@
     "keywords": ["memoize"],
     "homepage": "https://github.com/koktut/php-memoize",
     "license":  "MIT",
+    "version": "1.0.0",
     "authors": [
         {
             "name": "Maxim Sobin",
@@ -23,5 +24,6 @@
         }
     },
     "require": {
+        "php": "^7.1"
     }
 }

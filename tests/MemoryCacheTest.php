@@ -1,15 +1,16 @@
 <?php
 
-namespace PhpMemo;
+use PhpMemo\MemoryCache;
+use PHPUnit\Framework\TestCase;
 
-class MemoryCacheTest extends \PHPUnit_Framework_TestCase
+class MemoryCacheTest extends TestCase
 {
     private $testFunction;
 
     /**
-     * set up test environmemt
+     * @inheritDoc
      */
-    public function setUp()
+    public function setUp() : void
     {
         $this->testFunction = function ($val1, $val2) {
             return $val1 + $val2;
@@ -22,7 +23,7 @@ class MemoryCacheTest extends \PHPUnit_Framework_TestCase
     public function testMemoizeResultIsCorrect()
     {
         $memoryCache = new MemoryCache();
-        
+
         $func = $memoryCache->memoize($this->testFunction);
 
         $this->assertEquals(3, $func(1, 2));
@@ -34,13 +35,14 @@ class MemoryCacheTest extends \PHPUnit_Framework_TestCase
      */
     public function testCacheResult()
     {
-        $memoryCache = $this->getMock(
-            '\PhpMemo\MemoryCache',
-            [
-                'cacheResult',
-                'getCachedResult'
-            ]
-        );
+        $memoryCache = $this->getMockBuilder(MemoryCache::class)
+            ->onlyMethods(
+                [
+                    'cacheResult',
+                    'getCachedResult'
+                ]
+            )
+            ->getMock();
 
         $memoryCache->expects($this->once())->method('cacheResult');
         $memoryCache->expects($this->never())->method('getCachedResult');
@@ -53,12 +55,14 @@ class MemoryCacheTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetCachedResult()
     {
-        $memoryCache = $this->getMock(
-            '\PhpMemo\MemoryCache',
-            [
-                'getCachedResult'
-            ]
-        );
+        $memoryCache = $this->getMockBuilder(MemoryCache::class)
+            ->onlyMethods(
+                [
+                    'getCachedResult'
+                ]
+            )
+            ->getMock();
+
         $memoryCache->expects($this->once())->method('getCachedResult');
         $func = $memoryCache->memoize($this->testFunction);
         $func(1, 2);
@@ -70,14 +74,16 @@ class MemoryCacheTest extends \PHPUnit_Framework_TestCase
      */
     public function testCacheWhenNotCached()
     {
-        $memoryCache = $this->getMock(
-            '\PhpMemo\MemoryCache',
-            [
-                'isCached',
-                'cacheResult',
-                'getCachedResult'
-            ]
-        );
+        $memoryCache = $this->getMockBuilder(MemoryCache::class)
+            ->onlyMethods(
+                [
+                    'isCached',
+                    'cacheResult',
+                    'getCachedResult'
+                ]
+            )
+            ->getMock();
+
         $memoryCache->method('isCached')->will($this->returnValue(false));
         $memoryCache->expects($this->once())->method('cacheResult');
         $memoryCache->expects($this->never())->method('getCachedResult');
@@ -90,15 +96,17 @@ class MemoryCacheTest extends \PHPUnit_Framework_TestCase
      */
     public function testCacheWhenExpired()
     {
-        $memoryCache = $this->getMock(
-            '\PhpMemo\MemoryCache',
-            [
-                'isCached',
-                'isExpired',
-                'cacheResult',
-                'getCachedResult'
-            ]
-        );
+        $memoryCache = $this->getMockBuilder(MemoryCache::class)
+            ->onlyMethods(
+                [
+                    'isCached',
+                    'isExpired',
+                    'cacheResult',
+                    'getCachedResult'
+                ]
+            )
+            ->getMock();
+
         $memoryCache->method('isCached')->will($this->returnValue(true));
         $memoryCache->method('isExpired')->will($this->returnValue(true));
         $memoryCache->expects($this->once())->method('cacheResult');
@@ -112,12 +120,14 @@ class MemoryCacheTest extends \PHPUnit_Framework_TestCase
      */
     public function testClearCache()
     {
-        $memoryCache = $this->getMock(
-            '\PhpMemo\MemoryCache',
-            [
-                'getCachedResult'
-            ]
-        );
+        $memoryCache = $this->getMockBuilder(MemoryCache::class)
+            ->onlyMethods(
+                [
+                    'getCachedResult'
+                ]
+            )
+            ->getMock();
+
         $memoryCache->expects($this->exactly(2))->method('getCachedResult');
         $func = $memoryCache->memoize($this->testFunction);
         $func(1, 2);
@@ -128,17 +138,20 @@ class MemoryCacheTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers clearExpired
+     * @covers ::clearExpired
      */
     public function testClearExpired()
     {
-        $memoryCache = $this->getMock(
-            '\PhpMemo\MemoryCache',
-            [
-                'deleteResult'
-            ]
-        );
-        $memoryCache->expects($this->once(1))->method('deleteResult');
+        $memoryCache = $this->getMockBuilder(MemoryCache::class)
+            ->onlyMethods(
+                [
+                    'getCachedResult',
+                    'deleteResult',
+                ]
+            )
+            ->getMock();
+
+        $memoryCache->expects($this->once())->method('deleteResult');
         $func = $memoryCache->memoize($this->testFunction, 1);
         $func(1, 2);
         $memoryCache->clearExpired();
